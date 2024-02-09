@@ -13,7 +13,7 @@
             // return str.replace(/[^\x20-\x7E]/g, '');
             // return str.replace(/[\u200f-\u202f]/g, '');
             // https://stackoverflow.com/a/69024306
-            return str.replace(/[\u0000-\u0008\u000B-\u001F\u007F-\u009F\u2000-\u200F\u2028-\u202F\u205F-\u206F\u3000\uFEFF]/g, '');
+            return str.replace(/[ֿֿֿ\xa0\u0000-\u0008\u000B-\u001F\u007F-\u009F\u2000-\u200F\u2028-\u202F\u205F-\u206F\u3000\uFEFF]/g, '');
         }
 
         // ellipsis = U+2026
