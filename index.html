@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+    <script type="text/javascript">
+
+        function remove_non_ascii(str) {
+            // https://www.w3resource.com/javascript-exercises/javascript-string-exercise-32.php
+            if ((str===null) || (str===''))
+                return str;
+            else
+                str = str.toString();
+
+            // return str.replace(/[^\x20-\x7E]/g, '');
+            // return str.replace(/[\u200f-\u202f]/g, '');
+            // https://stackoverflow.com/a/69024306
+            return str.replace(/[\u0000-\u0008\u000B-\u001F\u007F-\u009F\u2000-\u200F\u2028-\u202F\u205F-\u206F\u3000\uFEFF]/g, '');
+        }
+
+        // ellipsis = U+2026
+        var unchar = function(){
+            var text = document.getElementById("myTextArea").value;
+            var altered = remove_non_ascii(text);
+            if (text == altered){
+                document.getElementById("result").innerHTML = "No change"
+            } else {
+                document.getElementById("result").innerHTML = "Yes change!"
+                document.getElementById("myTextArea").value = altered;
+                navigator.clipboard.writeText(document.getElementById("myTextArea").value);
+            }
+        }
+    </script>
+</head>
+<body>
+    <textarea id="myTextArea" style="width:100%"></textarea>
+    <button onclick="unchar()">Fix + Copy to Clipboard</button>
+    <br/>
+    <div id="result"></div>
+</body>
+</html>
