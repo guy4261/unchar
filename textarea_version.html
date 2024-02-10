@@ -17,22 +17,23 @@
         }
 
         // ellipsis = U+2026
-        var unchar = async function(){
-            var text = await navigator.clipboard.readText();
-            // var text = document.getElementById("myTextArea").value;
+        var unchar = function(){
+            var text = document.getElementById("myTextArea").value;
             var altered = remove_non_ascii(text);
             if (text == altered){
-                document.getElementById("myButton").innerHTML = "Text did not change,<br/>click here to rerun"
+                document.getElementById("result").innerHTML = "No change"
             } else {
-                document.getElementById("myButton").innerHTML = "Text changed!<br/>It's in your clipboard, paste away"
-                // document.getElementById("myTextArea").value = altered;
-                // navigator.clipboard.writeText(document.getElementById("myTextArea").value);
-                await navigator.clipboard.writeText(altered);
+                document.getElementById("result").innerHTML = "Yes change!"
+                document.getElementById("myTextArea").value = altered;
+                navigator.clipboard.writeText(document.getElementById("myTextArea").value);
             }
         }
     </script>
 </head>
 <body>
-    <button id="myButton" onclick="unchar()" style="font-size: 30px; width: 100%; height: 150px">Fix Text in Clipboard</button>
+    <textarea rows="20" id="myTextArea" style="width:100%"></textarea>
+    <button onclick="unchar()" style="font-size: 100px; width: 100%; height: 150px">Fix &amp; Copy to Clipboard</button>
+    <br/>
+    <div id="result"></div>
 </body>
 </html>
