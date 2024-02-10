@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+    <script type="text/javascript">
+
+        function remove_non_ascii(str) {
+            // https://www.w3resource.com/javascript-exercises/javascript-string-exercise-32.php
+            if ((str===null) || (str===''))
+                return str;
+            else
+                str = str.toString();
+
+            // return str.replace(/[^\x20-\x7E]/g, '');
+            // return str.replace(/[\u200f-\u202f]/g, '');
+            // https://stackoverflow.com/a/69024306
+            return str.replace(/[ֿֿֿ\xa0\u0000-\u0008\u000B-\u001F\u007F-\u009F\u2000-\u200F\u2028-\u202F\u205F-\u206F\u3000\uFEFF]/g, '');
+        }
+
+        // ellipsis = U+2026
+        var unchar = async function(){
+            var text = await navigator.clipboard.readText();
+            // var text = document.getElementById("myTextArea").value;
+            var altered = remove_non_ascii(text);
+            if (text == altered){
+                document.getElementById("myButton").innerHTML = "Text did not change,<br/>click here to rerun"
+            } else {
+                document.getElementById("myButton").innerHTML = "Text changed!<br/>It's in your clipboard, paste away"
+                // document.getElementById("myTextArea").value = altered;
+                // navigator.clipboard.writeText(document.getElementById("myTextArea").value);
+                await navigator.clipboard.writeText(altered);
+            }
+        }
+    </script>
+</head>
+<body>
+    <button id="myButton" onclick="unchar()" style="font-size: 30px; width: 100%; height: 150px">Fix Text in Clipboard</button>
+</body>
+</html>
