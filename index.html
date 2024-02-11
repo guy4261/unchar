@@ -11,10 +11,21 @@
             else
                 str = str.toString();
 
+            // remove '@' in start of words.
+            str = str.trim();
+            if (str.startsWith("@")){
+                str = str.substring(1);
+            }
+            str = str.replaceAll(" @", " ");
+
             // return str.replace(/[^\x20-\x7E]/g, '');
             // return str.replace(/[\u200f-\u202f]/g, '');
             // https://stackoverflow.com/a/69024306
-            return str.replace(/[ֿֿֿ\xa0\u0000-\u0008\u000B-\u001F\u007F-\u009F\u2000-\u200F\u2028-\u202F\u205F-\u206F\u3000\uFEFF]/g, '');
+            str = str.replace(/[ֿֿֿ\xa0\u0000-\u0008\u000B-\u001F\u007F-\u009F\u2000-\u200F\u2028-\u202F\u205F-\u206F\u3000\uFEFF]/g, '');
+            
+            str = str.trim();
+
+            return str;
         }
 
         // ellipsis = U+2026
