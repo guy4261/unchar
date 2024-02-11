@@ -46,5 +46,35 @@
 </head>
 <body>
     <button id="myButton" onclick="unchar()" style="font-size: 30px; width: 100%; height: 150px">Fix Text in Clipboard</button>
-</body>
-</html>
+
+    <hr/>
+    <h1>Clipboard Cleaner</h1>
+    <h2>How to use this tool?</h2>
+    <ol>
+        <li>Write your post.</li>
+        <li>Select All text and Copy it to your clipboard.</li>
+        <li>Visit this site and click on The Button (there's only one...)</li>
+        <li>Allow your browser to Paste the text from the clipboard into this tool.</li>
+        <li>The text will be fixed and put back into your clipboard.</li>
+        <li>You can now Paste and post the fixed text.</li>
+    </ol>
+
+    <h1>What does this tool do?</h1>
+    <ul>
+        <li>WhatsApp now <a href="https://faq.whatsapp.com/393169153028916/">marks messages with non-printable (=invisible) characters</a> as <b>suspicious links</b>.</li>
+            <li>These invisible characters can come from copying+pasting and end up getting a good message marked as evil.</li>
+            <li>This tool aims to solve this.</li>
+            <li>It removes non-printable (=invisible) characters that would make WhatsApp flag your post as suspicious.</li>
+            <li>It also removes <code>@</code> from the beginning of words (i.e. if you copied and pasted
+                <code>@foo</code> from somewhere, this mention is no longer relevant so I'll strip it down to <code>foo</code>.</li>
+            </ul>
+
+            <h1>I don't trust you!</h1>
+            <a href="https://github.com/guy4261/unchar">Here's the code, have fun :)</a><br/>
+            It uses the <code>Navigator.Clipboard</code> <a href="https://www.w3.org/TR/clipboard-apis/">native browser API</a> and no 3rd party libraries.
+
+            <h1>I trust you!</h1>
+            On mobile, you can <a href="https://support.apple.com/en-il/guide/iphone/iph42ab2f3a7/ios#iph4f9a47bbc">Add this app to your Home Screen</a> for faster access.    
+
+        </body>
+        </html>
