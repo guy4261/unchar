@@ -115,14 +115,16 @@
     </script>
 </head>
 <body onload="updateEnding()">
-    <button id="myButton" onclick="unchar()" style="font-size: 30px; width: 100%; height: 150px">Fix Text in Clipboard</button><br/>
-
-    <textarea id="ending" enabled></textarea><br/>
-        <button id="saveEnding" onclick="saveEnding()">Save</button>
-        <button id="clearEnding" onclick="clearEnding()">Clear</button>
-        <button id="toggleEnding" onclick="toggleEnding()"></button>
+    <center>
+    <button id="myButton" onclick="unchar()" style="font-size: 30px; width: 95%; height: 150px">Fix Text in Clipboard</button>
+    
     <br/>
-
+    <textarea rows="5" style="width:95%" id="ending" enabled></textarea><br/>
+        <button id="saveEnding" onclick="saveEnding()" style="font-size: 20px; width: 33%; height: 50px">Save</button>
+        <button id="clearEnding" onclick="clearEnding()" style="font-size: 20px; width: 33%; height: 50px">Clear</button>
+        <button id="toggleEnding" onclick="toggleEnding()" style="font-size: 20px; width: 33%; height: 50px"></button>
+    <br/>
+    </center>
     <hr/>
     <h1>Clipboard Cleaner</h1>
     <h2>How to use this tool?</h2>
