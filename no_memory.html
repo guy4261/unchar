@@ -4,19 +4,6 @@
     <title>Clipboard Cleaner</title>
     <script type="text/javascript">
 
-        // https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
-        var endingEnabled = localStorage.getItem("endingEnabled");
-        if (endingEnabled === null) {
-            endingEnabled = "true";
-            localStorage.setItem("endingEnabled", endingEnabled);
-        }
-
-        var ending = localStorage.getItem("ending");
-        if (ending === null){
-            ending = "";
-            localStorage.setItem("ending", ending);
-        }
-
         function remove_non_ascii(str) {
             // https://www.w3resource.com/javascript-exercises/javascript-string-exercise-32.php
             if ((str===null) || (str===''))
@@ -45,14 +32,7 @@
         var unchar = async function(){
             var text = await navigator.clipboard.readText();
             // var text = document.getElementById("myTextArea").value;
-            var ending = document.getElementById("ending").value;
-            var endingEnabled = localStorage.getItem("endingEnabled");
-            if (ending === null || endingEnabled === "false"){
-                var altered = remove_non_ascii(text);
-            } else {
-                var altered = remove_non_ascii(text + "\n\n" + ending);
-            }
-            
+            var altered = remove_non_ascii(text);
             if (text == altered){
                 document.getElementById("myButton").innerHTML = "Text did not change,<br/>click here to rerun"
             } else {
@@ -62,66 +42,10 @@
                 await navigator.clipboard.writeText(altered);
             }
         }
-
-        var saveEnding = function(){
-            var ending = document.getElementById("ending").value;
-            localStorage.setItem("ending", ending);
-        }
-        var clearEnding = function(){
-            localStorage.setItem("ending", "");
-            updateEnding();
-        }
-
-        var updateEnding = function(){
-            var ending = localStorage.getItem("ending");
-            var endingEnabled = localStorage.getItem("endingEnabled");
-
-            var endingTextArea = document.getElementById("ending");
-            endingTextArea.value = ending;
-
-            var toggleButton = document.getElementById("toggleEnding");
-            if (endingEnabled == "false"){
-                toggleButton.innerHTML = "Turn On"
-                endingTextArea.disabled = true;
-
-            } else {
-                toggleButton.innerHTML = "Turn Off"
-                endingTextArea.disabled = false;
-            }
-        }
-
-        var toggleEnding = function(){
-            var endingEnabled = localStorage.getItem("endingEnabled");
-            if (endingEnabled == "false"){
-                endingEnabled = "true";
-            } else {
-                endingEnabled = "false";
-            }
-            localStorage.setItem("endingEnabled", endingEnabled);
-
-            var toggleButton = document.getElementById("toggleEnding");
-            var endingTextArea = document.getElementById("ending");
-            if (endingEnabled == "false"){
-                toggleButton.innerHTML = "Turn On"
-                endingTextArea.disabled = true;
-            } else {
-                toggleButton.innerHTML = "Turn Off"
-                endingTextArea.disabled = false;
-            }
-
-
-        }
-
     </script>
 </head>
-<body onload="updateEnding()">
-    <button id="myButton" onclick="unchar()" style="font-size: 30px; width: 100%; height: 150px">Fix Text in Clipboard</button><br/>
-
-    <textarea id="ending" enabled></textarea><br/>
-        <button id="saveEnding" onclick="saveEnding()">Save</button>
-        <button id="clearEnding" onclick="clearEnding()">Clear</button>
-        <button id="toggleEnding" onclick="toggleEnding()"></button>
-    <br/>
+<body>
+    <button id="myButton" onclick="unchar()" style="font-size: 30px; width: 100%; height: 150px">Fix Text in Clipboard</button>
 
     <hr/>
     <h1>Clipboard Cleaner</h1>
@@ -151,5 +75,6 @@
 
             <h1>I trust you!</h1>
             On mobile, you can <a href="https://support.apple.com/en-il/guide/iphone/iph42ab2f3a7/ios#iph4f9a47bbc">Add this app to your Home Screen</a> for faster access.    
+
         </body>
         </html>
