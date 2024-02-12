@@ -17,6 +17,19 @@
             localStorage.setItem("ending", ending);
         }
 
+        function remove_words_starting_with_at(str){
+            return (str
+                .trim()
+                .replace("\r\n", "\n")
+                .split("\n")
+                .map(l => l.split()
+                    .filter(w => ! w.startsWith("@"))
+                    .join("\n")
+                    )
+                .join("\n")
+                )
+        }
+
         function remove_non_ascii(str) {
             // https://www.w3resource.com/javascript-exercises/javascript-string-exercise-32.php
             if ((str===null) || (str===''))
@@ -25,7 +38,8 @@
                 str = str.toString();
 
             // remove '@' in start of words.
-            str = str.trim();
+            str = remove_words_starting_with_at(str);            
+
             if (str.startsWith("@")){
                 str = str.substring(1);
             }
@@ -42,7 +56,7 @@
         }
 
         // ellipsis = U+2026
-        var unchar = async function(){
+        async function unchar(){
             var text = await navigator.clipboard.readText();
             // var text = document.getElementById("myTextArea").value;
             var ending = document.getElementById("ending").value;
@@ -63,16 +77,17 @@
             }
         }
 
-        var saveEnding = function(){
+        function saveEnding(){
             var ending = document.getElementById("ending").value;
             localStorage.setItem("ending", ending);
         }
-        var clearEnding = function(){
+
+        function clearEnding(){
             localStorage.setItem("ending", "");
             updateEnding();
         }
 
-        var updateEnding = function(){
+        function updateEnding(){
             var ending = localStorage.getItem("ending");
             var endingEnabled = localStorage.getItem("endingEnabled");
 
@@ -90,7 +105,7 @@
             }
         }
 
-        var toggleEnding = function(){
+        function toggleEnding(){
             var endingEnabled = localStorage.getItem("endingEnabled");
             if (endingEnabled == "false"){
                 endingEnabled = "true";
@@ -116,14 +131,14 @@
 </head>
 <body onload="updateEnding()">
     <center>
-    <button id="myButton" onclick="unchar()" style="font-size: 30px; width: 95%; height: 150px">Fix Text in Clipboard</button>
-    
-    <br/>
-    <textarea rows="5" style="width:95%" id="ending" enabled></textarea><br/>
+        <button id="myButton" onclick="unchar()" style="font-size: 30px; width: 95%; height: 150px">Fix Text in Clipboard</button>
+
+        <br/>
+        <textarea rows="5" style="width:95%" id="ending" enabled></textarea><br/>
         <button id="saveEnding" onclick="saveEnding()" style="font-size: 20px; width: 33%; height: 50px">Save</button>
         <button id="clearEnding" onclick="clearEnding()" style="font-size: 20px; width: 33%; height: 50px">Clear</button>
         <button id="toggleEnding" onclick="toggleEnding()" style="font-size: 20px; width: 33%; height: 50px"></button>
-    <br/>
+        <br/>
     </center>
     <hr/>
     <h1>Clipboard Cleaner</h1>
@@ -140,18 +155,22 @@
     <h1>What does this tool do?</h1>
     <ul>
         <li>WhatsApp now <a href="https://faq.whatsapp.com/393169153028916/">marks messages with non-printable (=invisible) characters</a> as <b>suspicious links</b>.</li>
-            <li>These invisible characters can come from copying+pasting and end up getting a good message marked as evil.</li>
-            <li>This tool aims to solve this.</li>
-            <li>It removes non-printable (=invisible) characters that would make WhatsApp flag your post as suspicious.</li>
-            <li>It also removes <code>@</code> from the beginning of words (i.e. if you copied and pasted
-                <code>@foo</code> from somewhere, this mention is no longer relevant so I'll strip it down to <code>foo</code>.</li>
-            </ul>
+        <li>These invisible characters can come from copying+pasting and end up getting a good message marked as evil.</li>
+        <li>This tool aims to solve this.</li>
+        <li>It removes non-printable (=invisible) characters that would make WhatsApp flag your post as suspicious.</li>
+        <li>It also removes <code>@</code> from the beginning of words (i.e. if you copied and pasted
+            <code>@foo</code> from somewhere, this mention is no longer relevant so I'll strip it down to <code>foo</code>.</li>
+        </ul>
 
-            <h1>I don't trust you!</h1>
-            <a href="https://github.com/guy4261/unchar">Here's the code, have fun :)</a><br/>
-            It uses the <code>Navigator.Clipboard</code> <a href="https://www.w3.org/TR/clipboard-apis/">native browser API</a> and no 3rd party libraries.
+        <h1>I don't trust you!</h1>
+        <a href="https://github.com/guy4261/unchar">Here's the code, have fun :)</a><br/>
+        It uses the <code>Navigator.Clipboard</code> <a href="https://www.w3.org/TR/clipboard-apis/">native browser API</a> and no 3rd party libraries.
 
-            <h1>I trust you!</h1>
-            On mobile, you can <a href="https://support.apple.com/en-il/guide/iphone/iph42ab2f3a7/ios#iph4f9a47bbc">Add this app to your Home Screen</a> for faster access.    
-        </body>
-        </html>
+        <h1>I trust you!</h1>
+        On mobile, you can <a href="https://support.apple.com/en-il/guide/iphone/iph42ab2f3a7/ios#iph4f9a47bbc">Add this app to your Home Screen</a> for faster access.    
+
+        <h1>Is there another way?</h1>
+        Sure - use this tool: <a href="https://www.soscisurvey.de/tools/view-chars.php">https://www.soscisurvey.de/tools/view-chars.php</a>.
+        
+    </body>
+    </html>
