@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="">
+    <script type="text/javascript">
+
+function shareOnFacebook() {
+
+    FB.init({
+        appId: '7312027972190961',
+        version: 'v10.0',
+    });
+
+    FB.ui({
+    method: 'share',
+    href: 'https://www.ynet.co.il',
+ }, function(response){window.alert(JSON.stringify(response))});
+}
+    </script>
+</head>
+<body>
+    <button onclick="shareOnFacebook()">Share on Facebook</button>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+</body>
+</html>
+
+<!--
+The domain of this URL isn't included in the app's domains.
+To be able to load this URL, add all domains and subdomains of your app to the App Domains field in your app settings.
+https://piyush132000.medium.com/sharing-content-on-facebook-with-javascript-a-step-by-step-guide-863221e009a9
+-->
